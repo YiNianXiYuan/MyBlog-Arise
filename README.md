@@ -27,29 +27,29 @@ Arise Blog是由SpringBoot1.5 + MyBatis + Thymeleaf等技术实现的个人网�
 
 ### 预览效果
 #### 前端效果
-![index](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/index.png)
+![index](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/index.png)
 
-![archives](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/archives.png)
+![archives](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/archives.png)
 
-![detail](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/detail.png)
+![detail](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/detail.png)
 
-![category](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/category.png)
+![category](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/category.png)
 
-![about](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/about.png)
+![about](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/about.png)
 
 #### 后端效果
 
-![adminlogin](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/adminlogin.png)
+![adminlogin](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/adminLogin.png)
 
-![adminindex](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/adminindex.png)
+![adminindex](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/adminIndex.png)
 
-![articlepublish](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/articlepublish.png)
+![articlepublish](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/articlePublish.png)
 
-![articlemanager](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/articlemanager.png)
+![articlemanager](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/articleManager.png)
 
-![filemanager](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/filemanager.png)
+![filemanager](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/fileManager.png)
 
-![setting](https://github.com/caozongpeng/github-static/blob/master/springBootBlog/setting.png)
+![setting](https://github.com/YiNianXiYuan/MyBlog-Arise/tree/master/blogImage/setting.png)
 
 ### 安装
 下载源码，执行sql文件，然后修改application-dev.yml文件中连接数据库的用户名、密码。运行项目即可。
