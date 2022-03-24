@@ -8,15 +8,16 @@
     </sql>
     <!--列名-->
     <sql id="BASE_COLUMN">
-        uid,username,password,email,homeUrl,screenName,created,activated,logged,groupName
+        uid
+        ,username,password,email,homeUrl,screenName,created,activated,logged,groupName
     </sql>
 
     <!--通过用户名和密码获取用户信息-->
     <select id="getUserInfoByCond" resultType="com.study.pojo.User">
         SELECT
-          <include refid="BASE_COLUMN"/>
+        <include refid="BASE_COLUMN"/>
         FROM
-          <include refid="BASE_TABLE"/>
+        <include refid="BASE_TABLE"/>
         <where>
             <if test="username != null">
                 AND username = #{username, jdbcType=VARCHAR}
@@ -30,16 +31,16 @@
     <!--通过用户ID获取用户信息-->
     <select id="getUserInfoById" parameterType="com.study.pojo.User">
         SELECT
-          <include refid="BASE_COLUMN"/>
+        <include refid="BASE_COLUMN"/>
         FROM
-          <include refid="BASE_TABLE"/>
+        <include refid="BASE_TABLE"/>
         WHERE
-          uid = #{uid, jdbcType=INTEGER}
+        uid = #{uid, jdbcType=INTEGER}
     </select>
     <!--更改用户信息-->
     <update id="updateUserInfo" parameterType="com.study.pojo.User">
         UPDATE
-          <include refid="BASE_TABLE"/>
+        <include refid="BASE_TABLE"/>
         <set>
             <if test="password != null">
                 password = #{password, jdbcType=VARCHAR},
@@ -52,8 +53,12 @@
             </if>
         </set>
         WHERE
-          uid = #{uid,jdbcType=INTEGER}
+        uid = #{uid,jdbcType=INTEGER}
     </update>
-
+    <!--注册新用户-->
+    <insert id="userRegister">
+        insert into lu_tale.t_users(username, password, email, screenName)
+        values (#{username}, #{password}, #{email}, #{screenName})
+    </insert>
 
 </mapper>

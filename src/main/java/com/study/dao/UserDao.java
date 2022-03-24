@@ -32,5 +32,14 @@ User getUserInfoByCond(@Param("username") String username, @Param("password") St
      */
     int updateUserInfo(User user);
 
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @param email
+     * @param screenName
+     * @return
+     */
+    int userRegister(@Param("username")String username, @Param("password")String password, @Param("email")String email, @Param("screenName")String screenName);
 
 }

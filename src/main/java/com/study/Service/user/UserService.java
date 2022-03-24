@@ -29,4 +29,14 @@ public interface UserService {
      * @return
      */
     int updateUserInfo(User user);
+
+    /**
+     * 注册用户
+     * @param username
+     * @param password
+     * @param email
+     * @param screenName
+     * @return
+     */
+    int userRegister(String username, String password, String email, String screenName);
 }

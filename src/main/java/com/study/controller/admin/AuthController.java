@@ -42,6 +42,52 @@ public class AuthController extends BaseController {
     @Autowired
     private LogService logService;
 
+    @ApiOperation("登录界面的注册按钮")
+    @GetMapping(value = "/register")
+    public String register() {
+        return "admin/register";
+    }
+
+    @ApiOperation("注册")
+    @PostMapping(value = "/register")
+    @ResponseBody
+    public APIResponse toRegister(@ApiParam(name = "username", value = "账号", required = true)
+                                  @RequestParam(name = "username", required = true)
+                                          String username,
+                                  @ApiParam(name = "password", value = "密码", required = true)
+                                  @RequestParam(name = "password", required = true)
+                                          String password,
+                                  @ApiParam(name = "email", value = "邮箱", required = false)
+                                  @RequestParam(name = "email", required = false)
+                                              String email,
+                                  @ApiParam(name = "screenName", value = "用户名", required = false)
+                                  @RequestParam(name = "screenName", required = false)
+                                              String screenName
+    ) {
+        Integer error_count = cache.get("register_error_count");
+        try {
+            // 调用Service注册方法
+            int userInfo = userService.userRegister(username, password, email, screenName);
+            if (0 == userInfo){
+                String msg = "账号已存在或填写信息不完整！";
+                return APIResponse.fail(msg);
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            System.out.println(error_count);
+            // 设置缓存为10分钟
+            cache.set("register_error_count", error_count, 10 * 60);
+            String msg = "注册失败";
+            if (e instanceof BusinessException) {
+                msg = e.getMessage();
+            } else {
+                LOGGER.error(msg, e);
+            }
+            return APIResponse.fail(msg);
+        }
+        // 返回注册成功信息
+        return APIResponse.success();
+    }
 
     @ApiOperation("跳转登录页")
     @GetMapping(value = "/login")
@@ -59,7 +105,7 @@ public class AuthController extends BaseController {
             @ApiParam(name = "username", value = "用户名", required = true)
             @RequestParam(name = "username", required = true)
                     String username,
-            @ApiParam(name = "password", value = "用户名", required = true)
+            @ApiParam(name = "password", value = "密码", required = true)
             @RequestParam(name = "password", required = true)
                     String password,
             @ApiParam(name = "remember_me", value = "记住我", required = false)
@@ -77,7 +123,7 @@ public class AuthController extends BaseController {
                 TaleUtils.setCookie(response, userInfo.getUid());
             }
             // 写入日志
-            logService.addLog(LogActions.LOGIN.getAction(), userInfo.getUsername()+"用户", request.getRemoteAddr(), userInfo.getUid());
+            logService.addLog(LogActions.LOGIN.getAction(), userInfo.getUsername() + "用户", request.getRemoteAddr(), userInfo.getUid());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             error_count = null == error_count ? 1 : error_count + 1;
@@ -91,7 +137,7 @@ public class AuthController extends BaseController {
             if (e instanceof BusinessException) {
                 msg = e.getMessage();
             } else {
-                LOGGER.error(msg,e);
+                LOGGER.error(msg, e);
             }
             return APIResponse.fail(msg);
         }
@@ -114,7 +160,7 @@ public class AuthController extends BaseController {
             response.sendRedirect("/admin/login");
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error("注销失败",e);
+            LOGGER.error("注销失败", e);
         }
     }
 
