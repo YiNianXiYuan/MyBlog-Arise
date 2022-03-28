@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -22,12 +23,12 @@ public class QiNiuCloudService {
     /**
      * 密钥凭证
      */
-    private static final String ACCESS_KEY = "yRJ48yXCiQYNyzCcTU9fA9E7e9ZvlODUkcwv";
+    private static final String ACCESS_KEY = "yRJ48yXCiQYNyzCcTU9fA9E7e9ZvlODUkcwv-Ent";
     private static final String SECRET_KEY = "EoMtgDtYZQL9HRcRYEeqODp3XMMysZHA3OOAJ1MO";
     /**
      * 仓库
      */
-    private static final String BUCKET = "";
+    private static final String BUCKET = "pubbishespace";
 
     /**
      * 七牛外网访问地址
@@ -76,5 +77,27 @@ public class QiNiuCloudService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String deleteFile(String fileKey){
+        // 构造一个带指定Zone对象的配置类
+        // 华东 Zone.zone0()
+        // 华北 Zone.zone1()
+        // 华南 Zone.zone2()
+        // 北美 Zone.zoneNa0()
+        Configuration cfg = new Configuration(Zone.zone2());
+        // 其它参数参考类注释
+
+        String key = fileKey;
+        Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+        BucketManager bucketManager = new BucketManager(auth, cfg);
+        try {
+            bucketManager.delete(BUCKET, key);
+        }catch (QiniuException ex){
+            // 如果遇到异常，说明删除失败
+            System.err.println(ex.code());
+            System.err.println(ex.response.toString());
+        }
+        return "1";
     }
 }

@@ -135,6 +135,7 @@ public class AttachController extends BaseController {
             if (null == attach)
                 throw BusinessException.withErrorCode(ErrorConstant.Att.DELETE_ATT_FAIL + ": 文件不存在");
             attAchService.deleteAttAch(id);
+            QiNiuCloudService.deleteFile(attach.getFkey());
             // 写入日志
             logService.addLog(LogActions.DEL_ATTACH.getAction(),this.user(request).getUsername()+"用户",request.getRemoteAddr(),this.getUid(request));
             return APIResponse.success();
