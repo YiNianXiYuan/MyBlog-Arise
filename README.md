@@ -1,6 +1,6 @@
 # Arise Blog
 ## 个人博客系统
-Arise Blog是由SpringBoot1.5 + MyBatis + Thymeleaf等技术实现的个人网站,参考https://github.com/caozongpeng
+Arise Blog是由SpringBoot1.5 + MyBatis + Thymeleaf等技术实现的个人网站
 ### 适用对象
 * Spring Boot 初学者。
 * 与作者一样，使用 hexo 但苦于没有后台管理工具（界面）管理文章的写作者。该博客系统模仿 hexo 生成的访问路径，并支持 markdown 文件导入功能。
